@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Cloudflare Pages 配置
-  output: "standalone",
+  // Vercel 部署配置
   images: {
     unoptimized: true,
   },
