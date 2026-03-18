@@ -1,8 +1,6 @@
-name = "image-background-remover"
+name = "image-bg-remover"
+main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
 [vars]
-REMOVEBG_API_KEY = ""
-
-# Uncomment and set your API key here
-# REMOVEBG_API_KEY = "your-api-key-here"
+REMOVE_BG_API_KEY = ""  # 需要在 Cloudflare 后台设置

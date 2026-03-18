@@ -1,88 +1,68 @@
-# 🖼️ Image Background Remover
+# Image Background Remover
 
-A simple, beautiful web app to remove image backgrounds using Remove.bg API. Deploys to Cloudflare Pages for free!
+使用 Cloudflare Workers + Remove.bg API 的图片去背工具。
 
-![Demo](https://via.placeholder.com/800x400/1a1a2e/00d2ff?text=Image+Background+Remover)
+## 功能
 
-## ✨ Features
+- 拖拽/点击上传图片
+- 一键去除背景
+- 预览对比
+- 直接下载透明背景图片
 
-- 🚀 Instant background removal
-- 🎨 Beautiful, modern UI
-- 📱 Mobile-friendly (drag & drop)
-- ☁️ Serverless - no storage needed
-- ⚡ Fast - processes in memory
+## 部署
 
-## 🚀 Deploy to Cloudflare Pages
-
-### Method 1: GitHub Integration (Recommended)
-
-1. **Create GitHub Repository**
-   - Go to [GitHub](https://github.com/new)
-   - Repository name: `image-background-remover`
-   - Public or Private
-
-2. **Push Code**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/image-background-remover.git
-   git push -u origin main
-   ```
-
-3. **Deploy on Cloudflare**
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com)
-   - Pages → Create project → Connect to Git
-   - Select your repository
-   - Build settings:
-     - Build command: (leave empty)
-     - Build output directory: (leave empty)
-   - Environment variables:
-     - Add `REMOVEBG_API_KEY` = your Remove.bg API key
-   - Click "Save and Deploy"
-
-### Method 2: CLI
+### 1. 克隆项目
 
 ```bash
-# Install Wrangler
+git clone <this-repo>
+cd image-bg-remover
+```
+
+### 2. 配置 Remove.bg API Key
+
+在 Cloudflare Workers 后台添加环境变量：
+- 变量名：`REMOVE_BG_API_KEY`
+- 值：你的 Remove.bg API Key
+
+或本地测试时在 `wrangler.toml` 中设置：
+
+```toml
+[vars]
+REMOVE_BG_API_KEY = "your-api-key"
+```
+
+### 3. 部署
+
+```bash
+# 安装依赖
 npm install -g wrangler
 
-# Set API key
-wrangler secret put REMOVEBG_API_KEY
-# Enter your Remove.bg API key when prompted
+# 登录 Cloudflare
+wrangler login
 
-# Deploy
-npx wrangler pages deploy .
+# 部署
+wrangler deploy
 ```
 
-## 🔧 Configuration
+部署完成后会得到一个 `*.workers.dev` 域名。
 
-### Remove.bg API Key
+## 获取 Remove.bg API Key
 
-Get your free API key at: https://www.remove.bg/api
+1. 访问 https://www.remove.bg/api
+2. 注册账号
+3. 免费版：50 张/月
+4. 获取 API Key
 
-- Free tier: 50 images/month
-- Paid: $0.019/image
-
-## 📁 Project Structure
-
-```
-image-background-remover/
-├── index.html          # Frontend UI
-├── api/
-│   └── remove-bg.js   # Cloudflare Worker function
-├── wrangler.toml      # Cloudflare config
-└── _headers           # CORS headers
-```
-
-## 🛠️ Development
+## 本地开发
 
 ```bash
-# Local development with Cloudflare
-npx wrangler pages dev .
+wrangler dev
 ```
 
-## 📝 License
+访问 http://localhost:8787
 
-MIT
+## 配置说明
+
+- Workers 计划：免费版足够个人使用
+- 每月免费额度：10万请求 + 100万KV 操作
+- Remove.bg 免费：50 张/月
